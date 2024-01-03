@@ -37,7 +37,7 @@ router.post("/login", (req, res) => {
     const hashedPassword = bcrypt.hashSync(DBuser.password, 14);
    
     // Check if the user exists and the password matches using bcrypt
-    if (DBuser && bcrypt.compareSync(username, password, hashedPassword)) {
+    if (DBuser && bcrypt.compareSync(password, hashedPassword)) {
       // Generate a JSON Web Token (JWT) for the user
       const token = generateToken(DBuser);
       // Send a success response with the JWT and user data
