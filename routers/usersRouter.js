@@ -16,13 +16,12 @@ router.get("/user", (req, res) => {
 router.post("/register", (req, res) => {
  const user = req.body;
 
- console.log(user);
-
  res.status(201).json({ message: "I'm alive!" });
 });
 
 // POST a user to login
 router.post("/login", (req, res) => {
+  console.log("body", req.body);
     // Extract the username and password from the request body
     const { username, password } = req.body;
     // Placeholder user object - later we will fetch the real user from the database
@@ -35,6 +34,7 @@ router.post("/login", (req, res) => {
     // Later we will compare this hash to the hash stored in the database
     // But for now, we will just do it manually
     const hashedPassword = bcrypt.hashSync(DBuser.password, 14);
+    console.log("hashedPassword", hashedPassword);
    
     // Check if the user exists and the password matches using bcrypt
     if (DBuser && bcrypt.compareSync(password, hashedPassword)) {
