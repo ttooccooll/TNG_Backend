@@ -21,4 +21,22 @@ module.exports = {
         directory: "./db/seeds",
       },
     },
- 
+    // This is the configuration for your production environment
+   production: {
+    // This is the database client that knex will use, in this case PostgreSQL (pg)
+    client: "pg",
+     // This is the connection configuration for your PostgreSQL database
+    // process.env.DATABASE_URL is an environment variable that points to your PostgreSQL database
+    connection: process.env.DATABASE_URL,
+     // These are the settings for your database migrations
+    migrations: {
+      // This is the directory where your migration files are stored
+      directory: "./db/migrations",
+    },
+     // These are the settings for your database seeds
+    seeds: {
+      // This is the directory where your seed files are stored
+      directory: "./db/seeds",
+    },
+  },
+};
