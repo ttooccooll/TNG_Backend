@@ -12,7 +12,7 @@ exports.up = function (knex) {
     // The second argument, 128, sets the maximum length of this string column
     table.string("password", 128).notNullable();
 
-    // Creates an integer column named "adminKey" that defaults to 1 if no other value is provided
+    // Creates a string column named "adminKey" that defaults to 1 if no other value is provided
     table.string("adminKey").defaultTo(null);
   });
 };
