@@ -2,7 +2,7 @@ exports.up = function (knex) {
   // Begins the creation of a new table named "users"
   return knex.schema.createTable("users", function (table) {
     // Creates a primary key column which auto increments its value for each new record
-    table.increments();
+    table.increments().primary();
 
     // Creates a string column named "username" that cannot be null and must be unique across all records
     // The second argument, 128, sets the maximum length of this string column
