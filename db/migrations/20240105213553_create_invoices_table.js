@@ -34,3 +34,9 @@ exports.up = function (knex) {
     table.foreign("user_id").references("id").inTable("users");
   });
 };
+
+exports.down = function (knex) {
+  // This function will drop the "invoices" table, undoing the effects of the `up` function
+  // This is useful for resetting the database to its prior state if something goes wrong
+  return knex.schema.dropTableIfExists("invoices");
+};
