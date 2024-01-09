@@ -43,16 +43,30 @@ const getBalance = async () => {
     return channelBalance;
    };
 
-   const createInvoice = async ({ value, memo }) => {
+   const createInvoice = async ({ value, memo, user_id }) => {
+    // Use the 'addInvoice' method from the Lightning service of the 'grpc' module to create an invoice.
+    // This method requires an object parameter with 'value' and 'memo' properties.
+    // This method is asynchronous, so we use 'await' to pause execution until it completes.
     const invoice = await lnd.services.Lightning.addInvoice({
       value: value,
       memo: memo,
     });
    
-    // Save invoice to DB
+    // After creating the invoice with the Lightning service, we create a record in our own database using the 'Invoice' model's 'create' method.
+    // This method requires an object parameter with properties for 'payment_request', 'value', 'memo', 'settled', 'send', and 'user_id'.
+    // Note that 'settled' is set to false (since the invoice has just been created and is not yet paid), and 'send' is also false (since we haven't sent the invoice yet).
+    await Invoice.create({
+      payment_request: invoice.payment_request,
+      value: value,
+      memo: memo,
+      settled: false,
+      send: false,
+      user_id: user_id,
+    });
    
+    // Finally, the function returns the invoice that was created with the Lightning service.
     return invoice;
-   };
+   };   
    
    const payInvoice = async ({ payment_request }) => {
     const paidInvoice = await lnd.services.Lightning.sendPaymentSync({
