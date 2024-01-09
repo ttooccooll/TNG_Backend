@@ -51,16 +51,25 @@ router.get("/invoices", (req, res) => {
 
 // POST required info to create an invoice
 router.post("/invoice", authenticate, (req, res) => {
-    const { value, memo } = req.body;
-   
-    createInvoice({ value, memo })
-      .then((invoice) => {
-        res.status(200).json(invoice);
-      })
-      .catch((err) => {
-        res.status(500).json(err);
-      });
-   });   
+  // The 'authenticate' middleware function is called before the main handler.
+  // This function checks if the user making the request is authenticated.
+ 
+  // Extract 'value', 'memo', and 'user_id' properties from the body of the incoming request.
+  const { value, memo, user_id } = req.body;
+  // Call the 'createInvoice' function, passing the extracted properties as an object.
+  // This function creates a new invoice record in the database.
+  createInvoice({ value, memo, user_id })
+    .then((invoice) => {
+      // If the promise resolves (i.e., the operation was successful), we send back a response with a status of 200 (OK)
+      // and the invoice object retrieved from the database.
+      res.status(200).json(invoice);
+    })
+    .catch((err) => {
+      // If the promise is rejected (i.e., the operation fails), we send back a response with a status of 500 (Internal Server Error)
+      // and the error that occurred. This could be due to a database issue, a network issue, etc.
+      res.status(500).json(err);
+    });
+ }); 
    
 // POST an invoice to pay
 router.post("/pay", authenticateAdmin, async (req, res) => {
