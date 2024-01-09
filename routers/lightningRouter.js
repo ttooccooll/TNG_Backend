@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const authenticate = require("../routers/middleware/authenticate");
 const authenticateAdmin = require("../routers/middleware/authenticateAdmin");
+const Invoice = require("../db/models/invoice.js");
+
 const {
     getBalance,
     createInvoice,
@@ -33,8 +35,19 @@ router.get("/channelbalance", (req, res) => {
 
 // GET all invoices from the database
 router.get("/invoices", (req, res) => {
- res.status(200).json({ message: "I'm alive!" });
-});
+  // Call the 'findAll' method from our Invoice model. This method retrieves all invoice records from the database.
+  Invoice.findAll()
+    .then((invoices) => {
+      // If the promise resolves (i.e., the operation was successful), we send back a response with a status of 200 (OK)
+      // and the list of invoices retrieved from the database.
+      res.status(200).json(invoices);
+    })
+    .catch((err) => {
+      // If the promise is rejected (i.e., the operation fails), we send back a response with a status of 500 (Internal Server Error)
+      // and the error that occurred. This might be due to a database issue, a network issue, etc.
+      res.status(500).json(err);
+    });
+ }); 
 
 // POST required info to create an invoice
 router.post("/invoice", authenticate, (req, res) => {
