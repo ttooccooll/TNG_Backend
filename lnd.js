@@ -82,22 +82,26 @@ const getBalance = async () => {
       settle_index: 0,
     })
       .on("data", async (data) => {
-            console.log('invoice change', data);
         if (data.settled) {
           // Check if the invoice exists in the database
-          const existingInvoice = false;
+          const existingInvoice = await Invoice.findOne(data.payment_request);
+   
    
           // If the invoice exists, update it in the database
           if (existingInvoice) {
-            // update db
+            await Invoice.update(data.payment_request, {
+              settled: data.settled,
+              settle_date: data.settle_date,
+            });
           } else {
+            console.log("Invoice not found in the database");
           }
         }
       })
       .on("error", (err) => {
         console.log(err);
       });
-   };   
+    };
    
    module.exports = {
     connect,
