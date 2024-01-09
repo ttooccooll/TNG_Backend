@@ -12,8 +12,10 @@ const options = {
 const lnd = new LndGrpc(options);
 
 const connect = async () => {
+
  try {
    await lnd.connect();
+   await lnd.activateLightning();
 
    if (lnd.state !== "active") {
      throw new Error(

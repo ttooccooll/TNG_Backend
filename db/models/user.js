@@ -1,5 +1,5 @@
 // First, we require our configured instance of knex from the dbConfig.js file.
-const db = require("./dbConfig");
+const db = require("../dbConfig");
 
 // We then export an object with several methods, each representing a different database operation
 module.exports = {
