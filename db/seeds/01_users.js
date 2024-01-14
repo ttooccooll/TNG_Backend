@@ -9,12 +9,14 @@ exports.seed = async function (knex) {
      username: "Alice",
      password: bcrypt.hashSync("pass1", 14),
      adminKey: "1234",
+     rank: "Plebian"
    },
    {
      id: 2,
      username: "Bob",
      password: bcrypt.hashSync("pass2", 14),
      adminKey: null,
+     rank: "Plebian"
    },
  ]);
 };
