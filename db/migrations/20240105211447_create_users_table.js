@@ -14,6 +14,7 @@ exports.up = function (knex) {
 
     // Creates a string column named "adminKey" that defaults to 1 if no other value is provided
     table.string("adminKey").defaultTo(null);
+    table.string("rank").defaultTo("Plebian");
   });
 };
 
