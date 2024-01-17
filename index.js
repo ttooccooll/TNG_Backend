@@ -11,7 +11,9 @@ const lightningRouter = require("./routers/lightningRouter");
 dotenv.config()
 
 // Create a new instance of the Express server
-const server = express()
+const server = express();
+
+server.set('trust proxy', 1);
 
 // Use helmet middleware for security
 server.use(helmet());
