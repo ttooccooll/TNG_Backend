@@ -27,7 +27,10 @@ module.exports = {
     client: "pg",
      // This is the connection configuration for your PostgreSQL database
     // process.env.DATABASE_URL is an environment variable that points to your PostgreSQL database
-    connection: process.env.DATABASE_URL,
+    connection: {
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+    },
      // These are the settings for your database migrations
     migrations: {
       // This is the directory where your migration files are stored
