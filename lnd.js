@@ -5,7 +5,7 @@ const Invoice = require("./db/models/invoice");
 dotenv.config();
 
 const options = {
-  lndconnectURi: process.env.LND_CONNECT_URI
+  lndconnectUri: process.env.LND_CONNECT_URI
 };
 
 const lnd = new LndGrpc(options);
