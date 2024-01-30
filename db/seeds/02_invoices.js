@@ -1,6 +1,6 @@
 exports.seed = async function (knex) {
  // Deletes ALL existing entries
-
+ await knex("invoices").del();
  await knex("invoices").insert([
    {
      payment_request: "lnbcrt1u1p...",
