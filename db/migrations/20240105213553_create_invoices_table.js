@@ -5,7 +5,7 @@ exports.up = function (knex) {
     table.increments("id").primary();
 
     // Creates a string column named "payment_request" that cannot be null and must be unique across all records
-    table.string("payment_request").notNullable().unique();
+    table.text("payment_request").notNullable().unique();
 
     // Creates an integer column named "value" that cannot be null
     table.integer("value").notNullable();
