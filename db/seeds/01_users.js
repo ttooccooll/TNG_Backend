@@ -1,11 +1,8 @@
 const bcrypt = require("bcryptjs");
 
 exports.seed = async function (knex) {
- // Deletes related invoices
- await knex("invoices").del();
- // Deletes users after related invoices are deleted
+ // Deletes ALL existing entries
  await knex("users").del();
- // Inserts new user records
  await knex("users").insert([
    {
      id: 1,
