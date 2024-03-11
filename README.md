@@ -1,4 +1,4 @@
-This is a UI for an Voltage node that's meant to look like a console from the tv show Star Trek: The Next Generation.
+This is a UI for a Voltage node that's meant to look like a console from the tv show Star Trek: The Next Generation.
 
 Front-end
 https://github.com/ttooccooll/TNG-Wallet-for-Voltage
